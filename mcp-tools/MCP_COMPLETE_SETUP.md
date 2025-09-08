@@ -11,48 +11,45 @@
 ```json
 {
   "mcpServers": {
-    "everything": {
-      "command": "mcp-server-everything",
-      "args": ["--transport", "stdio"]
-    },
-    "fetch": {
-      "command": "mcp-server-fetch", 
-      "args": ["--transport", "stdio"]
-    },
     "filesystem": {
-      "command": "mcp-server-filesystem",
-      "args": ["--transport", "stdio"],
-      "env": {
-        "ALLOWED_DIRECTORIES": "."
-      }
+      "command": "uvx",
+      "args": ["mcp-server-filesystem", "--allowed-directories", "."]
     },
     "git": {
-      "command": "mcp-server-git",
-      "args": ["--transport", "stdio"]
+      "command": "uvx",
+      "args": ["mcp-server-git"]
     },
     "github": {
-      "command": "mcp-server-github",
-      "args": ["--transport", "stdio"]
+      "command": "uvx",
+      "args": ["mcp-server-github"]
+    },
+    "fetch": {
+      "command": "uvx",
+      "args": ["mcp-server-fetch"]
     },
     "memory": {
-      "command": "mcp-server-memory", 
-      "args": ["--transport", "stdio"]
-    },
-    "sequential-thinking": {
-      "command": "mcp-server-sequential-thinking",
-      "args": ["--transport", "stdio"]
-    },
-    "time": {
-      "command": "mcp-server-time",
-      "args": ["--transport", "stdio"]
+      "command": "uvx",
+      "args": ["mcp-server-memory"]
     },
     "puppeteer": {
-      "command": "mcp-server-puppeteer",
-      "args": ["--transport", "stdio"]
+      "command": "uvx",
+      "args": ["mcp-server-puppeteer"]
     },
     "sqlite": {
-      "command": "mcp-server-sqlite",
-      "args": ["--transport", "stdio", "--db-path", "./data.db"]
+      "command": "uvx", 
+      "args": ["mcp-server-sqlite", "--db-path", "./data.db"]
+    },
+    "time": {
+      "command": "uvx",
+      "args": ["mcp-server-time"]
+    },
+    "sequential-thinking": {
+      "command": "uvx",
+      "args": ["mcp-server-sequential-thinking"]
+    },
+    "everything": {
+      "command": "uvx",
+      "args": ["mcp-server-everything"]
     }
   }
 }
@@ -60,43 +57,15 @@
 
 ---
 
-## STEP 2: Install the MCP Servers
+## STEP 2: Verify Setup
 
-**ACTION REQUIRED:** Run these installation commands to install all MCP servers globally:
+**NO INSTALLATION NEEDED!** The `uvx` command automatically handles downloading and running the MCP servers on-demand. This is why we use `uvx` - it's a Python tool runner that installs packages automatically when first used.
 
-```bash
-# Install all official MCP reference servers
-npm install -g @modelcontextprotocol/server-everything
-npm install -g @modelcontextprotocol/server-fetch  
-npm install -g @modelcontextprotocol/server-filesystem
-npm install -g @modelcontextprotocol/server-git
-npm install -g @modelcontextprotocol/server-memory
-npm install -g @modelcontextprotocol/server-sequential-thinking
-npm install -g @modelcontextprotocol/server-time
-
-# Install additional useful servers
-npm install -g @modelcontextprotocol/server-github
-npm install -g @modelcontextprotocol/server-puppeteer
-npm install -g @modelcontextprotocol/server-sqlite
-```
-
-**ALTERNATIVE:** If npm packages don't exist with those exact names, try the uvx approach:
-
-Update the `.mcp.json` file to use uvx commands instead:
-- Replace `"command": "mcp-server-NAME"` with `"command": "uvx"`
-- Replace `"args": ["--transport", "stdio"]` with `"args": ["mcp-server-NAME"]`
-
-Example for git server:
-```json
-"git": {
-  "command": "uvx",
-  "args": ["mcp-server-git"]
-}
-```
+**Note:** The first time each server is used, `uvx` will download it automatically. This may take a few seconds per server on first use.
 
 ---
 
-## STEP 3: Verify and Complete Setup
+## STEP 3: Complete Setup
 
 After creating the `.mcp.json` file and installing servers:
 
@@ -190,18 +159,14 @@ After creating the `.mcp.json` file and installing servers:
 
 If tools aren't available after restart:
 
-1. **Check if npm packages exist:** The npm package names might be different. Try:
-   - Search for packages: `npm search @modelcontextprotocol`
-   - Or use the uvx approach described above
+1. **Verify uvx is installed:** Run `which uvx` to confirm uvx is available
+   - If not installed, install with: `pip install uv`
 
 2. **Verify .mcp.json location:** Must be in the project root directory
 
 3. **Check for errors:** Look for any error messages when Claude Code starts
 
-4. **Alternative package names to try:**
-   - Instead of `@modelcontextprotocol/server-NAME`
-   - Try: `mcp-server-NAME` 
-   - Or: `@mcp/server-NAME`
+4. **Test a server manually:** Try running `uvx mcp-server-git --help` to verify it works
 
 ---
 
