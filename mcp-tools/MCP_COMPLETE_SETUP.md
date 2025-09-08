@@ -50,10 +50,6 @@
       "command": "mcp-server-puppeteer",
       "args": ["--transport", "stdio"]
     },
-    "brave-search": {
-      "command": "mcp-server-brave-search",
-      "args": ["--transport", "stdio"]
-    },
     "sqlite": {
       "command": "mcp-server-sqlite",
       "args": ["--transport", "stdio", "--db-path", "./data.db"]
@@ -81,7 +77,6 @@ npm install -g @modelcontextprotocol/server-time
 # Install additional useful servers
 npm install -g @modelcontextprotocol/server-github
 npm install -g @modelcontextprotocol/server-puppeteer
-npm install -g @modelcontextprotocol/server-brave-search
 npm install -g @modelcontextprotocol/server-sqlite
 ```
 
@@ -183,11 +178,6 @@ After creating the `.mcp.json` file and installing servers:
 - `mcp__puppeteer__type` - Type text
 - `mcp__puppeteer__navigate` - Navigate to URLs
 
-#### 🔍 Brave Search Server (Web Search)
-- `mcp__brave_search__search` - Search the web
-- `mcp__brave_search__search_news` - Search news
-- `mcp__brave_search__search_images` - Search images
-
 #### 💾 SQLite Server (Database)
 - `mcp__sqlite__query` - Execute SQL queries
 - `mcp__sqlite__execute` - Execute SQL commands
@@ -225,7 +215,6 @@ Once set up, you'll have direct access to:
 - **Time utilities** for scheduling
 - **Problem-solving** assistance
 - **Browser automation** capabilities
-- **Web search** functionality
 - **Database** operations
 
 ---
